@@ -21,8 +21,7 @@ CUDA Stream Compaction
 
 
 ### Output
-'''
-
+```
 ****************
 ** SCAN TESTS **
 ****************
@@ -86,5 +85,5 @@ CUDA Stream Compaction
 Passed
    elapsed time: 51.8793ms    (CPU Measured)
 Press any key to continue . . .
-'''
+```
 
