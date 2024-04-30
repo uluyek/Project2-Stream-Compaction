@@ -8,11 +8,11 @@ CUDA Stream Compaction
 
 ### Overview 
 **My Implementations:**
- - part 1 : implement cpu version of `StreamCompaction::CPU::scan`,`StreamCompaction::CPU::compactWithoutScan`,`StreamCompaction::CPU::compactWithScan`
- - part 2 : naive gpu scan algorithm
- - part 3 :  Work-Efficient GPU Scan & Stream Compaction
- - part 4 :  Using Thrust's Implementation
- - part 5 : explain the reason "Why is My GPU Approach So Slow?" (Extra Credit)
+ - Part 1 : implement cpu version of `StreamCompaction::CPU::scan`,`StreamCompaction::CPU::compactWithoutScan`,`StreamCompaction::CPU::compactWithScan`
+ - Part 2 : naive gpu scan algorithm
+ - Part 3 :  Work-Efficient GPU Scan & Stream Compaction
+ - Part 4 :  Using Thrust's Implementation
+ - Part 5 : explain the reason "Why is My GPU Approach So Slow?" (Extra Credit)
  - Part 6 : Radix Sort  (cpu version of Radix Sort) (Extra Credit)
  - Part 7 : Optimize the code so as to avoid warp divergence  (Extra Credit)
    
