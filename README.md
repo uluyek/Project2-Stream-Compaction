@@ -20,7 +20,24 @@ CUDA Stream Compaction
  - For the code of Part 7, I added two files `hard.cu` and `hard.h`
 
 ### Performance Analysis 
+#### Performance test
+set the array size [1<<10, 1<<12, 1<<14, 1<<16, 1<<18, 1<<20, 1<<22 ] to test 
 
+ - the performance of the code for scan:
+![]()
+ - the performance of the code for stream compaction:
+![]()
+
+#### Profile
+we use Nsight to profile the code, the profile figure is given as below:
+![]()
+
+#### Analysis
+From the performance test we can observe that when the array size is small, the CPU version of the scan runs fastest. And when the array size is large, the thrust version is faster. The reason why thrust is slower than the CPU when the array size is small is when the array size is small, the code is memory bound.
+
+Compared with the three versions of GPU scan, we can get that the naive is the slowest, then the efficient is faster, and the hard(based on the hard version) is the fastest while all three are slower than the thrust.
+
+From the profile figure, we see that we can get that for the thrust version, the thrust uses many blocks, but in my implementation, I use only one block for thread synchronization. When compared to the optimization code (Part 7), we can see this code is far faster than the efficient version since I have reduced warp divergence in this version. 
 
 ### output (array size 2^22)
 ```
