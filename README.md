@@ -30,7 +30,7 @@ set the array size [1<<10, 1<<12, 1<<14, 1<<16, 1<<18, 1<<20, 1<<22 ] to test
 
 #### Profile
 we use Nsight to profile the code, the profile figure is given below:
-![](https://github.com/uluyek/Project2-Stream-Compaction/blob/main/profile.png)
+![](https://github.com/uluyek/Project2-Stream-Compaction/blob/main/nsight%20profile.jpg)
 
 #### Analysis
 From the performance test we can observe that when the array size is small, the CPU version of the scan runs fastest. And when the array size is large, the thrust version is faster. The reason why thrust is slower than the CPU when the array size is small is when the array size is small, the code is memory bound.
