@@ -32,15 +32,26 @@ set the array size [1<<10, 1<<12, 1<<14, 1<<16, 1<<18, 1<<20, 1<<22 ] to test
 we use Nsight to profile the code, the profile figure is given below:
 ![](https://github.com/uluyek/Project2-Stream-Compaction/blob/main/nsight%20profile.jpg)
 
-#### Analysis
-From the performance test we can observe that when the array size is small, the CPU version of the scan runs fastest. And when the array size is large, the thrust version is faster. The reason why thrust is slower than the CPU when the array size is small is when the array size is small, the code is memory bound.
+#### Performance Analysis
 
-Compared with the three versions of GPU scan, we can get that the naive is the slowest, then the efficient is faster, and the hard(based on the hard version) is the fastest while all three are slower than the thrust.
+The performance was evaluated under various implementations:
 
-From the profile figure, we see that we can get that for the thrust version, the thrust uses many blocks, but in my implementation, I use only one block for thread synchronization. When compared to the optimization code (Part 7), we can see this code is far faster than the efficient version since I have reduced warp divergence in this version. 
+- **CPU Version:** Most efficient with smaller datasets due to minimal overhead compared to GPU memory transfers.
+- **Naive vs Efficient GPU:** The efficient version outperforms the naive one. However, due to single-block synchronization and warp divergence, it is still slower than the CPU version.
+- **Part 7 - Hardware Optimized:** Nearly matches the performance of the Thrust version but is slightly slower. This discrepancy is primarily due to the single thread block used in our implementation versus multiple blocks in Thrust.
+- **Optimization Opportunity:** Converting loops within kernels into multiple kernels could allow using multiple blocks, potentially matching or surpassing Thrust performance.
 
-### Optimization
-For the implementation, I just use only one thread block, but the code in Part 7 is just a little slower than the thrust version.
+#### Issues with Up-Down Phase Prefix Scan
+
+During the up-phase of the prefix scan, each thread corresponds to a specific index in the array, resulting in significant underutilization of threads. Initially, operations are performed on pairs like positions 0 and 1, 2 and 3, 4 and 5, leading to only half of the threads being active. As the scan progresses, fewer threads participate, culminating in severe warp divergence.
+
+#### Optimization in Part 7 -- Adjusted Thread Indexing
+In Part 7, we revised the thread indexing strategy to enhance utilization:
+- **First Pass:** Thread indices 0 to 3 correspond to array positions 1, 3, 5, and 7.
+- **Second Pass:** The same threads map to positions 3, 7, 11, and 15.
+- **Mapping Formula:** `p = i * (2^p) - 1`, where `i` is the thread index and `p` is the number of scans.
+
+This method ensures all threads are active, reducing idle time significantly.
 
 ### output (array size 2^22)
 ```
