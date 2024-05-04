@@ -39,6 +39,9 @@ Compared with the three versions of GPU scan, we can get that the naive is the s
 
 From the profile figure, we see that we can get that for the thrust version, the thrust uses many blocks, but in my implementation, I use only one block for thread synchronization. When compared to the optimization code (Part 7), we can see this code is far faster than the efficient version since I have reduced warp divergence in this version. 
 
+### Optimization
+For the implementation, I just use only one thread block, but the code in Part 7 is just a little slower than the thrust version.
+
 ### output (array size 2^22)
 ```
 ****************
