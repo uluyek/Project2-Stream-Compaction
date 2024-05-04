@@ -24,9 +24,9 @@ CUDA Stream Compaction
 set the array size [1<<10, 1<<12, 1<<14, 1<<16, 1<<18, 1<<20, 1<<22 ] to test 
 
  - the performance of the code for scan:
-![]()
+![](https://github.com/uluyek/Project2-Stream-Compaction/blob/main/scan.jpg)
  - the performance of the code for stream compaction:
-![]()
+![](https://github.com/uluyek/Project2-Stream-Compaction/blob/main/stream.jpg)
 
 #### Profile
 we use Nsight to profile the code, the profile figure is given as below:
